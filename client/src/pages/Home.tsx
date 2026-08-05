@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import ReviewCard from "../components/ReviewCard";
-import placeholderImg from "../assets/placeholder.png"
+import { reviews } from "../data/reviews";
 
 export default function Home() {
     return (
@@ -25,24 +25,12 @@ export default function Home() {
             <section className="mx-auto max-w-5xl px-8 py-16">
                 <h2 className="mb-4 text-4xl font-bold">Latest Reviews</h2>
 
-                <ReviewCard
-                    img={placeholderImg}
-                    title="Persona 5 Royal"
-                    rating={10}
-                    tagline="A masterclass JRPG with time management mechanics."
-                />
-                <ReviewCard
-                    img={placeholderImg}
-                    title="Resident Evil 4 Remake"
-                    rating={10}
-                    tagline="An action packed adventure filled with captivating gameplay, fantastic setting, and fun challenges."
-                />
-                <ReviewCard
-                    img={placeholderImg}
-                    title="The Legend of Zelda: Ocarina of Time"
-                    rating={10}
-                    tagline="A timeless classic that sets the exapmle for adventure games."
-                />
+                {reviews.map(review => (
+                    <ReviewCard
+                        key={review.id}
+                        review={review}
+                        />
+                ))}
 
             </section>
         </>
