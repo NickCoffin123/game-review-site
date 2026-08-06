@@ -7,6 +7,7 @@ export const reviews: Review[] = [
         id: 1,
         img: placeholderImg,
         title: "Persona 5 royal",
+        slug: "persona-5-royal",
         rating: 10,
         tagline: "A masterclass JRPG with time management mechanics."
     },
@@ -14,6 +15,7 @@ export const reviews: Review[] = [
         id: 2,
         img: placeholderImg,
         title: "Resident Evil 4 Remake",
+        slug: "resident-evil-4-remake",
         rating: 10,
         tagline: "An action packed adventure filled with captivating gameplay, fantastic setting, and fun challenges."
     },
@@ -21,6 +23,7 @@ export const reviews: Review[] = [
         id: 3,
         img: placeholderImg,
         title: "The Legend of Zelda: Ocarina of Time",
+        slug: "the-legend-of-zelda-ocarina-of-time",
         rating: 10,
         tagline: "A timeless classic that sets the example for adventue."
     }
