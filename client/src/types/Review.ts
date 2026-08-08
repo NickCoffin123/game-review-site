@@ -5,4 +5,7 @@ export type Review = {
     img: string;
     rating: number;
     tagline: string;
+    body: string[];
+    good: string[];
+    bad: string[];
 }
