@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import ReviewCard from "../components/ReviewCard";
 import { reviews } from "../data/reviews";
+import { editorials } from "../data/editorials";
+import EditorialCard from "../components/EditorialCard";
 
 export default function Home() {
     return (
@@ -32,6 +34,18 @@ export default function Home() {
                         />
                 ))}
 
+            </section>
+
+            {/*Editorial section*/}
+            <section className="mx-auto max-w-5xl px-8 py-16">
+                <h2 className="mb-4 text-4xl font-bold">Latest Editorials</h2>
+
+                {editorials.map(editorial => (
+                    <EditorialCard
+                        key={editorial.id}
+                        editorial={editorial}
+                    />
+                ))}
             </section>
         </>
     );
