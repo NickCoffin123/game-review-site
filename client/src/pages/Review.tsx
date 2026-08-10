@@ -12,8 +12,8 @@ export default function Review() {
     }
 
     return (
-        <>
-            <section className="mx-auto max-w-5xl px-8 py-16">
+        <article className="mx-auto max-w-5xl px-8 py-16">
+            <header>
                 <div className="flex gap-8 mb-2">
                     <img className="h-72 w-52 object-cover rounded-md"
                         src={review.img} alt={review.title}
@@ -23,6 +23,7 @@ export default function Review() {
                         <p>{review.tagline}</p>
                     </div>
                 </div>
+            </header>
 
                 <div className="space-y-4 my-8 text-lg leading-8">
                     {review.body.map((paragraph, index) => (
@@ -30,7 +31,7 @@ export default function Review() {
                     ))}
                 </div>
 
-                <div className="flex gap-8 justify-center items-center">
+                <section className="flex gap-8 justify-center items-center">
                     <div className="flex-1 rounded-lg border p-6">
                         <h2 className="text-2xl font-bold">The good</h2>
                         <ul>
@@ -48,13 +49,13 @@ export default function Review() {
                             ))}
                         </ul>
                     </div>
-                </div>
+                </section>
 
-                <div className="mt-4 flex items-center justify-center gap-8 text-4xl font-bold">
-                    <p>Verdict</p>
+                <section className="mt-4 flex items-center justify-center gap-8 text-4xl font-bold">
+                    <h2>Verdict</h2>
                     <p>{review.rating} / 10</p>
-                </div>
-            </section>
-        </>
+                </section>
+            
+        </article>
     )
 }
