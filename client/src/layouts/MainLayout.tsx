@@ -6,16 +6,15 @@ export default function MainLayout() {
     return (
         <>
             <header>
-                <Navbar/>
+                <Navbar />
             </header>
 
             <main>
                 <Outlet />
             </main>
 
-            <footer>
-                <Footer />
-            </footer>
+            <Footer />
+
         </>
     )
 }
