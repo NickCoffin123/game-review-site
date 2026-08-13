@@ -4,3 +4,5 @@
 # ASP.NET build output
 **/bin/
 **/obj/
+
+*.user
