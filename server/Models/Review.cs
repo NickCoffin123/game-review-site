@@ -2,7 +2,7 @@ namespace server.Models;
 
 public class Review
 {
-    public  int Id { get; set; }
+    public int Id { get; set; }
     public required string Title { get; set; }
     public required string Slug { get; set; }
     public string? Img { get; set; }

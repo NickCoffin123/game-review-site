@@ -63,7 +63,7 @@ public class ReviewsController : ControllerBase
             Title = "The Legend of Zelda: Ocarina of Time",
             Slug = "the-legend-of-zelda-ocarina-of-time",
             Rating = 10,
-            Tagline = "A timeless classic that sets the example for adventue.",
+            Tagline = "A timeless classic that sets the example for adventure.",
             Body = [
                 "Sup.",
                 "here is the review."
