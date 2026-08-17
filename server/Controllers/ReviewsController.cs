@@ -88,4 +88,18 @@ public class ReviewsController : ControllerBase
         return reviews;
     }
 
+    [HttpGet("{slug}")]
+    public ActionResult<Review> GetReview(string slug)
+    {
+        Review? review = reviews.FirstOrDefault(review => review.Slug == slug);
+
+        if (review == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(review);
+
+    }
+
 }
