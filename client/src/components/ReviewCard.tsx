@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { Review } from "../types/Review";
+import placeholderImg from "../assets/placeholder.png";
 
 type ReviewCardProps = {
     review: Review
@@ -15,7 +16,7 @@ export default function ReviewCard({
                 <div className="flex-shrink-0">
                     <img
                         className="h-40 w-40 rounded-md object-cover"
-                        src={review.img}
+                        src={review.img !== "" ? review.img : placeholderImg}
                         alt={review.title}
                     />
                 </div>
