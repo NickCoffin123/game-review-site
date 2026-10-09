@@ -1,91 +1,32 @@
-﻿using server.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using server.Data;
+using server.Models;
 
 
 namespace server.Services
 {
     public class ReviewService
     {
-        private static readonly List<Review> reviews = [
-    new Review
+
+        private readonly AppDbContext _appDbContext;
+
+        public ReviewService(AppDbContext appDbContext)
         {
-            Id = 1,
-            Img = "",
-            Title = "Persona 5 Royal",
-            Slug = "persona-5-royal",
-            Rating = 10,
-            Tagline = "A masterclass JRPG with time management mechanics.",
-            Body = [
-                "Sup.",
-                "here is the review."
-                ],
-            Good = [
-                "Good stuff here,",
-                "and here,",
-                "and here"
-                ],
-            Bad = [
-                "Bad stuff here,",
-                "and here,",
-                "and here"
-                ]
-            },
-
-        new Review {
-
-            Id = 2,
-            Img = "",
-            Title = "Resident Evil 4 Remake",
-            Slug = "resident-evil-4-remake",
-            Rating = 10,
-            Tagline = "An action packed adventure filled with captivating gameplay, fantastic setting, and fun challenges.",
-            Body = [
-                "Sup.",
-                "here is the review."
-                ],
-            Good = [
-                "Good stuff here,",
-                "and here,",
-                "and here"
-                ],
-            Bad = [
-                "Bad stuff here,",
-                "and here,",
-                "and here"
-                ]
-        },
-
-        new Review {
-            Id = 3,
-            Img = "",
-            Title = "The Legend of Zelda: Ocarina of Time",
-            Slug = "the-legend-of-zelda-ocarina-of-time",
-            Rating = 10,
-            Tagline = "A timeless classic that sets the example for adventure.",
-            Body = [
-                "Sup.",
-                "here is the review."
-                ],
-            Good = [
-                "Good stuff here,",
-                "and here,",
-                "and here"
-                ],
-            Bad = [
-                "Bad stuff here,",
-                "and here,",
-                "and here"
-                ]
-        }
-    ];
-
-        public List<Review> GetReviews()
-        {
-            return reviews;
+            _appDbContext = appDbContext;
         }
 
-        public Review? GetReview(string slug)
+        public async Task<List<Review>> GetReviews()
         {
-            return reviews.FirstOrDefault(review => review.Slug == slug);
+            var response = await _appDbContext.Reviews.ToListAsync();
+
+            return response;
+        }
+
+        public async Task<Review?> GetReview(string slug)
+        {
+            var response = await _appDbContext.Reviews.FirstOrDefaultAsync(review => review.Slug == slug);
+
+            return response;
         }
     }
 }
