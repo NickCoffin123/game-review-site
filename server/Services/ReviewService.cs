@@ -1,4 +1,5 @@
-﻿using server.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using server.Data;
 using server.Models;
 
 
@@ -14,14 +15,18 @@ namespace server.Services
             _appDbContext = appDbContext;
         }
 
-        public List<Review> GetReviews()
+        public async Task<List<Review>> GetReviews()
         {
-            return _appDbContext.Reviews.ToList();
+            var response = await _appDbContext.Reviews.ToListAsync();
+
+            return response;
         }
 
-        public Review? GetReview(string slug)
+        public async Task<Review?> GetReview(string slug)
         {
-            return _appDbContext.Reviews.FirstOrDefault(review => review.Slug == slug);
+            var response = await _appDbContext.Reviews.FirstOrDefaultAsync(review => review.Slug == slug);
+
+            return response;
         }
     }
 }

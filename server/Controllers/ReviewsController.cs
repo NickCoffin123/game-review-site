@@ -16,15 +16,17 @@ public class ReviewsController : ControllerBase
     }
 
     [HttpGet]
-    public List<Review> GetReviews()
+    public async Task<List<Review>> GetReviews()
     {
-        return _reviewService.GetReviews();
+        var response = await _reviewService.GetReviews();
+
+        return response;
     }
 
     [HttpGet("{slug}")]
-    public ActionResult<Review> GetReview(string slug)
+    public async Task<ActionResult<Review>> GetReview(string slug)
     {
-        Review? review = _reviewService.GetReview(slug);
+        Review? review = await _reviewService.GetReview(slug);
 
         if (review == null)
         {
