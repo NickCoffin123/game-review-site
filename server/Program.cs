@@ -130,7 +130,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
                     Title = "Is Early Access Going Too Far?",
                     Tagline = "At what point is early access a crutch?",
                     Img = "",
-                    Slug = "is-early-access-going-to-far",
+                    Slug = "is-early-access-going-too-far",
                     Body = ["here is some stuff.", "I love Project Zomboid but 10 years is crazy",
             "I know it helps devs with little to no funding to make a game but there should be some" +
             " kind of promise for delivery of product."]
