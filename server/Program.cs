@@ -19,6 +19,7 @@ builder.Services.AddCors(options =>
     });
 });
 builder.Services.AddScoped<ReviewService>();
+builder.Services.AddScoped<EditorialService>();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
     .UseSeeding((context, _) =>
@@ -97,6 +98,44 @@ builder.Services.AddDbContext<AppDbContext>(options =>
                 }
                 );
 
+            context.SaveChanges();
+        }
+
+        if (!context.Set<Editorial>().Any())
+        {
+            context.Set<Editorial>().AddRange(
+                new Editorial
+                {
+                    Title = "The Open World Epidemic",
+                    Tagline = "Open world games, how many are too many?",
+                    Img = "",
+                    Slug = "the-open-world-epidemic",
+                    Body = ["here is some stuff,",
+            "There are too many open world games.",
+            "Not everything needs to be open world."]
+                },
+                new Editorial
+                {
+                    Title = "Remakes and Remasters vs New Content",
+                    Tagline = "Is the onslaught of remade content keeping us from new experiences or" +
+            " does making old games accessible give people a way to experience mechanically dated masterpieces?",
+                    Img = "",
+                    Slug = "remakes-and-remasters-vs-new-content",
+                    Body = ["here is some stuff.",
+            "So many remakes and remasters with differing degrees of quality.",
+            "The money dumped into it keeps money from going into new content."]
+                },
+                new Editorial
+                {
+                    Title = "Is Early Access Going Too Far?",
+                    Tagline = "At what point is early access a crutch?",
+                    Img = "",
+                    Slug = "is-early-access-going-to-far",
+                    Body = ["here is some stuff.", "I love Project Zomboid but 10 years is crazy",
+            "I know it helps devs with little to no funding to make a game but there should be some" +
+            " kind of promise for delivery of product."]
+                }
+                );
             context.SaveChanges();
         }
     }));

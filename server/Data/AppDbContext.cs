@@ -12,5 +12,7 @@ namespace server.Data
 
         public DbSet<Review> Reviews { get; set; }
 
+        public DbSet<Editorial> Editorials { get; set; }
+
     }
 }
