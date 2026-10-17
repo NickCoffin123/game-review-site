@@ -6,10 +6,11 @@ export default function Reviews() {
 
     const [allReviews, setAllReviews] = useState<Review[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [hasError, setHasError] = useState(false);
+    const [errorStatus, setErrorStatus] = useState<number>();
 
     useEffect(() => {
         const fetchReviews = async () => {
+            setErrorStatus(undefined);
             try {
                 const response = await fetch("http://localhost:5085/api/reviews");
 
@@ -23,7 +24,6 @@ export default function Reviews() {
 
             } catch (error) {
                 console.log(error);
-                setHasError(true);
             } finally {
                 setIsLoading(false);
             }
@@ -37,7 +37,7 @@ export default function Reviews() {
         return <p>Loading...</p>;
     }
 
-    if (hasError) {
+    if (errorStatus === 404) {
         return <h1>Unable to load reviews</h1>;
     }
 

@@ -1,14 +1,54 @@
 import { useParams } from "react-router-dom";
-import { editorials } from "../data/editorials";
+import { useState, useEffect } from "react";
+import type { Editorial } from "../types/Editorial";
+import placeholderImg from "../assets/placeholder.png";
 
 export default function Editorial() {
 
+    const [soloEditorial, setSoloEditorial] = useState<Editorial>();
+    const [isLoading, setIsLoading] = useState(true);
+    const [errorStatus, setErrorStatus] = useState<number>();
+
     const { slug } = useParams();
 
-    const editorial = editorials.find((editorial) => editorial.slug === slug);
+    useEffect(() => {
+        const fetchEditorial = async () => {
+            setIsLoading(true);
+            setErrorStatus(undefined);
+            setSoloEditorial(undefined);
+            try {
+                const response = await fetch(`http://localhost:5085/api/editorials/${slug}`);
 
-    if (!editorial) {
-        return <h1>No Editorial found</h1>
+                if (!response.ok) {
+                    setErrorStatus(response.status);
+                    throw new Error(`HTTP ERROR ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                setSoloEditorial(data);
+
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchEditorial();
+
+    }, [slug])
+
+    if (isLoading) {
+        return <p>Loading...</p>
+    }
+
+    if (errorStatus === 404) {
+        return <p>Unable to load editorial.</p>
+    }
+
+    if (!soloEditorial) {
+        return <p>Editorial not found.</p>
     }
 
     return (
@@ -16,19 +56,19 @@ export default function Editorial() {
             <header>
                 <div className="flex gap-8 mb-2">
                     <img className="w-52 h-72 object-cover rounded-md"
-                        src={editorial.img}
-                        alt={editorial.title}
+                        src={soloEditorial.img !== "" ? soloEditorial.img : placeholderImg}
+                        alt={soloEditorial.title}
                     />
 
                     <div className="flex flex-col gap-8 justify-center">
-                        <h1 className="text-3xl font-bold">{editorial.title}</h1>
-                        <p className="text-lg">{editorial.tagline}</p>
+                        <h1 className="text-3xl font-bold">{soloEditorial.title}</h1>
+                        <p className="text-lg">{soloEditorial.tagline}</p>
                     </div>
                 </div>
             </header>
 
             <div className="space-y-4 my-4 text-lg leading-8">
-                {editorial.body.map((paragraph, index) => (
+                {soloEditorial.body.map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
                 ))}
             </div>
