@@ -48,7 +48,7 @@ export default function Editorial() {
     }
 
     if (!soloEditorial) {
-        return <p>Editoral does not exist.</p>
+        return <p>Unable to load editorial.</p>
     }
 
     return (
