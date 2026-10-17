@@ -1,4 +1,3 @@
-import { editorials } from "../data/editorials";
 import EditorialCard from "../components/EditorialCard";
 import type { Editorial } from "../types/Editorial";
 import { useState, useEffect } from "react";

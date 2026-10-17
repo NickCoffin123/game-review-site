@@ -44,11 +44,11 @@ export default function Editorial() {
     }
 
     if (errorStatus === 404) {
-        return <p>Unable to load editorial.</p>
+        return <p>Editorial not found.</p>
     }
 
     if (!soloEditorial) {
-        return <p>Editorial not found.</p>
+        return <p>Editoral does not exist.</p>
     }
 
     return (
