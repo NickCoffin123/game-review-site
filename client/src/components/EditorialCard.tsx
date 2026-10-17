@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { Editorial } from "../types/Editorial"
+import placeholderImg from "../assets/placeholder.png";
 
 type EditorialCardProps = {
     editorial: Editorial
@@ -12,7 +13,7 @@ export default function EditorialCard({ editorial }: EditorialCardProps) {
                 <div className="flex shrink-0">
                     <img
                         className="h-40 w-40 rounded-md object-cover"
-                        src={editorial.img}
+                        src={editorial.img !== "" ? editorial.img : placeholderImg}
                         alt={editorial.title}
                     />
                 </div>

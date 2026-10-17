@@ -22,8 +22,8 @@ export default function Reviews() {
                 setAllReviews(data);
 
             } catch (error) {
+                setHasError(true)
                 console.log(error);
-                setHasError(true);
             } finally {
                 setIsLoading(false);
             }
