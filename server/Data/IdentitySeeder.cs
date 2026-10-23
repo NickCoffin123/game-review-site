@@ -65,6 +65,13 @@ namespace server.Data
                 }
 
                 var roleResult = await userManager.AddToRoleAsync(admin, "Admin");
+
+                if (!roleResult.Succeeded)
+                {
+                    var errors = string.Join(", ", roleResult.Errors.Select(e => e.Description));
+
+                    throw new InvalidOperationException($"Failed to assign Admin role: {errors}");
+                }
             }
             else
             {
