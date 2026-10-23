@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.Models;
@@ -140,7 +141,32 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         }
     }));
 
+builder.Services
+    .AddIdentity<ApplicationUser, IdentityRole>(options =>
+    {
+        options.User.RequireUniqueEmail = false;
+        options.Password.RequiredLength = 12;
+        options.Password.RequireNonAlphanumeric = true;
+        options.Password.RequireDigit = true;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireUppercase = true;
+    })
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider
+        .GetRequiredService<RoleManager<IdentityRole>>();
+
+    var userManager = scope.ServiceProvider
+        .GetRequiredService<UserManager<ApplicationUser>>();
+
+    await IdentitySeeder.SeedRolesAsync(roleManager);
+    await IdentitySeeder.SeedAdminAsync(userManager, app.Configuration);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -150,6 +176,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowReactDev");
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 
