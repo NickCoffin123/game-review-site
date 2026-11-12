@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using server.DTOs;
 using server.Models;
@@ -10,10 +11,12 @@ namespace server.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public AuthController(SignInManager<ApplicationUser> signInManager)
+    public AuthController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
     {
         _signInManager = signInManager;
+        _userManager = userManager;
     }
 
     [HttpPost("login")]
@@ -30,6 +33,28 @@ public class AuthController : ControllerBase
 
         return Unauthorized();
 
+
+    }
+
+    [Authorize]
+    [HttpGet("me")]
+    public async Task<IActionResult> Me()
+    {
+        var user = await _userManager.GetUserAsync(User);
+
+        if (user == null)
+        {
+            return Unauthorized();
+        }
+
+        var Roles = await _userManager.GetRolesAsync(user);
+
+        return Ok(new
+        {
+            UserName = user.UserName,
+            DisplayName = user.DisplayName,
+            userRoles = Roles
+        });
 
     }
 }
