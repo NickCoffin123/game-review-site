@@ -5,6 +5,7 @@ import Reviews from "./pages/Reviews";
 import Review from "./pages/Review";
 import Editorials from "./pages/Editorials";
 import Editorial from "./pages/Editorial";
+import Login from "./pages/Login";
 
 
 
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/reviews/:slug" element={<Review />} />
                     <Route path="/editorials" element={<Editorials />} />
                     <Route path="/editorials/:slug" element={<Editorial />} />
+                    <Route path="/login" element={<Login />} />
                 </Route>
             </Routes>
         </BrowserRouter>
